@@ -23,7 +23,7 @@ ordinary least-squares.
 In both cases coefficients of innovation, imitation, and maximum number of adopters are calculated
 
 ### Data
-Data used 
+Data used in the example is downloaded and manipulated by excel from https://www.kaggle.com/datasets/kyanyoga/sample-sales-data.
 #### Visualizations
 The package includes four types of visualizations:
 - plot()
