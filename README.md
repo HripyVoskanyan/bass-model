@@ -35,7 +35,7 @@ The methods visualize the predicted and actual sales, as well as
 the cumulative distribution functions.
 #### Applications
 The Bass Diffusion model can be used to forecast new products'
-sales. In our example, it is used to predict the sales of phone sales.
+sales. In our example, it is used to predict the sales of motorcycle sales.
 #### References
 - Castro, Alejandro Puerto. “Alejandropuerto/Product-Market-Forecasting-Bass-Model.” GitHub, 7 July 2022, github.com/alejandropuerto/product-market-forecasting-bass-model. Accessed 14 Dec. 2022.
 - Grasman, Johan, and Marcel Kornelis. “Forecasting Product Sales with a Stochastic Bass Model.” Journal of Mathematics in Industry, vol. 9, no. 1, 7 Feb. 2019, 10.1186/s13362-019-0059-6.
