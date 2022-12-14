@@ -8,12 +8,13 @@ decide the diffusion pattern.
 Follow the example of test.py
 ```
 from bassmodel.models.BassOLS import *
-model = BassOLS('data.xlsx')
+model = BassOLS('../utils/data.csv')
 model.fit()
 model.predict()
 model.plot()
 model.summary()
 ```
+Change the directories correspondingly.
 #### Models
 The package includes two types of implementations of Bass Difussion Model:
 - OLS: estimations are done by choosing the best coefficients of
