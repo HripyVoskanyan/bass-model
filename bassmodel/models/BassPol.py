@@ -54,8 +54,11 @@ class BassPol(BaseModel):
             print('Error: Incorrect file format. Please provide a file with csv, xlsx or txt formats.')
 
     def __bass_model__(self, t, p, q, k, **kwargs):
-        np.seterr(over='ignore', invalid='ignore')
-        self.res = k * ((1 - np.exp(-1 * (p + q) * t)) / (1 + (q / p) * np.exp(-1 * (p + q) * t)))
+        arg1 = -(p + q) * t
+        exp = np.exp(arg1)
+        num = 1 - exp
+        den = (1 + (q / p) * exp)
+        self.res = k * (num / den)
         return self.res
 
     def fit(self):
@@ -67,26 +70,8 @@ class BassPol(BaseModel):
             The estimation of the coefficient of the non-linear LS regression
         """
         self.popt, self.cov = curve_fit(self.__bass_model__, self.time_range, self.body)
-        self.p = self.popt[0]  # innovation coefficient
-        self.q = self.popt[1]  # imitation coefficient
-        self.m = self.popt[2]  # get the maximum
+        self.p, self.q, self.m = self.popt[0], self.popt[1], self.popt[2]
         return self.p, self.q, self.m
-
-    @staticmethod
-    def __max__(a, b):
-        """
-        Magic method for max
-        Parameters
-        ----------
-        a : int
-
-        b : int
-        Returns
-        -------
-        int
-            maximum value of a and b couple
-        """
-        return max(a, b)
 
     def predict(self):
         self.forecast = self.__bass_model__(self.time_range, *self.popt)  # optimization of popt
@@ -107,6 +92,7 @@ class BassPol(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
+        #plt.grid()
         plt.show()
 
     def plot_predict(self):
@@ -123,6 +109,7 @@ class BassPol(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
+        #plt.grid()
         plt.show()
 
     def plot_actual(self):
@@ -138,6 +125,7 @@ class BassPol(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
+        #plt.grid()
         plt.show()
 
     def plot_cdf(self):
@@ -153,9 +141,10 @@ class BassPol(BaseModel):
         plt.xlabel('Time')
         plt.ylabel('Cumulative Sales')
         plt.title('Cumulative Distribution Function Over Time')
+        #plt.grid()
         plt.show()
 
-    def summary(self):
+    def summarize(self):
         """
         Method to summarize the bass model by giving important metrics.
         Returns
