@@ -25,6 +25,7 @@ In both cases coefficients of innovation, imitation, and maximum number of adopt
 
 ### Data
 Data used in the example is downloaded and manipulated by excel from https://www.kaggle.com/datasets/kyanyoga/sample-sales-data.
+The user should input the data in csv, xlsx, or txt format with Date and Sales columns. Date can be in any format: daily, weekly, quarterly.
 #### Visualizations
 The package includes four types of visualizations:
 - plot()
