@@ -130,7 +130,7 @@ class BassOLS(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
-        #plt.grid()
+        plt.grid()
         plt.show()
 
     def plot_predict(self):
@@ -146,7 +146,7 @@ class BassOLS(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
-        #plt.grid()
+        plt.grid()
         plt.show()
 
     def plot_actual(self):
@@ -162,7 +162,7 @@ class BassOLS(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
-        #plt.grid()
+        plt.grid()
         plt.show()
 
     def plot_cdf(self):
@@ -178,7 +178,7 @@ class BassOLS(BaseModel):
         plt.xlabel('Time')
         plt.ylabel('Cumulative Sales')
         plt.title('Cumulative Distribution Function Over Time')
-        #plt.grid()
+        plt.grid()
         plt.show()
 
     def summarize(self):
