@@ -90,23 +90,11 @@ class BassOLS(BaseModel):
         int or float
             rate of change
         """
-        return (np.exp((p + q) * t) * p * (p + q) ** 2) / ((p * np.exp((p + q) * t) + q) ** 2)
-
-    @staticmethod
-    def __max__(a, b):
-        """
-        Magic method for max
-        Parameters
-        ----------
-        a : int
-
-        b : int
-        Returns
-        -------
-        int
-            maximum value of a and b couple
-        """
-        return max(a, b)
+        arg1 = t * (p + q)
+        pexp = p * np.exp(arg1) 
+        num = pexp * (p + q) ** 2
+        den = (pexp * t + q) ** 2
+        return num / den
 
     def predict(self):
         """
@@ -135,13 +123,14 @@ class BassOLS(BaseModel):
         -------
             scatter and line plots of actual and forecasted sales correspondingly
         """
-
+        
         plt.plot(self.time_range, self.forecast, color='tomato', label='Forecasted Sales')
         plt.plot(self.time_range, self.body, 'o', color='royalblue', label='Actual Sales')
         plt.ylabel('Sales')
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
+        #plt.grid()
         plt.show()
 
     def plot_predict(self):
@@ -157,6 +146,7 @@ class BassOLS(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
+        #plt.grid()
         plt.show()
 
     def plot_actual(self):
@@ -172,6 +162,7 @@ class BassOLS(BaseModel):
         plt.xlabel('Time')
         plt.title("Bass Diffusion Model for Sales")
         plt.legend(loc='best')
+        #plt.grid()
         plt.show()
 
     def plot_cdf(self):
@@ -187,16 +178,17 @@ class BassOLS(BaseModel):
         plt.xlabel('Time')
         plt.ylabel('Cumulative Sales')
         plt.title('Cumulative Distribution Function Over Time')
+        #plt.grid()
         plt.show()
 
-    def summary(self):
+    def summarize(self):
         """
         Method to summarize the bass model by giving important metrics.
         Returns
         -------
             metrics of the model
         """
-        print(self.result.summary())
+        print(self.result.summarize())
         print('=' * 92)
         print('Bass Diffusion Model Summary')
         print('{:<24}{:<10}'.format('Variable', 'Estimation'))
@@ -205,3 +197,20 @@ class BassOLS(BaseModel):
         print('{:<24}{:<10.2f}'.format('Maximum Adopters', self.m))
         print('{:<24}{:<10.2f}'.format('Peak Adoption Time', (np.log(self.q) - np.log(self.p) / (self.p + self.q))))
         print('=' * 92)
+
+    def __max__(self, a, b):
+            """
+            Magic method for max
+            Parameters
+            ----------
+            a : int
+
+            b : int
+            Returns
+            -------
+            int
+                maximum value of a and b couple
+            """
+            if a > b:
+                return a
+            return b
